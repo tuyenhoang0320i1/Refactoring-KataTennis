@@ -6,69 +6,77 @@
  * Time: 6:20 PM
  */
 
+define("LOVE", 0);
+define("FIFTEEN", 15);
+define("THIRTY", 30);
+define("FORTY", 40);
+
 class TennisGame
 {
     public $score = '';
 
-    public function getScore($player1Name, $player2Name, $m_score1, $m_score2)
+    public function getScore($player1, $player2, $scoreOfPlayer1, $scoreOfPlayer2)
     {
-        $tempScore=0;
+        $tempScore = 0;
 
-        if ($m_score1==$m_score2) {
-            switch ($m_score1)
-            {
+        if ($scoreOfPlayer1 == $scoreOfPlayer2) {
+            switch ($scoreOfPlayer1) {
                 case 0:
-                    $this->score = "Love-All";
+                    $this->score = LOVE;
                     break;
                 case 1:
-                    $this->score = "Fifteen-All";
+                    $this->score = FIFTEEN;
                     break;
                 case 2:
-                    $this->score = "Thirty-All";
+                    $this->score = THIRTY;
                     break;
                 case 3:
-                    $this->score = "Forty-All";
+                    $this->score = FORTY;
                     break;
                 default:
                     $this->score = "Deuce";
                     break;
 
             }
-        }
-        else if ($m_score1>=4 || $m_score2>=4)
-        {
-            $minusResult = $m_score1-$m_score2;
-            if ($minusResult==1) $this->score ="Advantage player1";
-            else if ($minusResult ==-1) $this->score ="Advantage player2";
-            else if ($minusResult>=2) $this->score = "Win for player1";
-            else $this->score ="Win for player2";
-        }
-        else
-        {
-            for ($i=1; $i<3; $i++)
-            {
-                if ($i==1) $tempScore = $m_score1;
-                else { $this->score.="-"; $tempScore = $m_score2;}
-                switch($tempScore)
-                {
+        } else if ($scoreOfPlayer1 >= 4 || $scoreOfPlayer2 >= 4) {
+            $minusResult = $scoreOfPlayer1 - $scoreOfPlayer2;
+            if ($minusResult == 1) {
+                $this->score = "Advantage player1";
+            } else if ($minusResult == -1) {
+                $this->score = "Advantage player2";
+            } else if ($minusResult >= 2) {
+                $this->score = "Win for player1";
+            } else {
+                $this->score = "Win for player2";
+            }
+        } else {
+            for ($i = 1; $i < 3; $i++) {
+                if ($i == 1) {
+                    $tempScore = $scoreOfPlayer1;
+                } else {
+                    $this->score .= "-";
+                    $tempScore = $scoreOfPlayer2;
+                }
+                switch ($tempScore) {
                     case 0:
-                        $this->score.="Love";
+                        $this->score .= LOVE;
                         break;
                     case 1:
-                        $this->score.="Fifteen";
+                        $this->score .= FIFTEEN;
                         break;
                     case 2:
-                        $this->score.="Thirty";
+                        $this->score .= THIRTY;
                         break;
                     case 3:
-                        $this->score.="Forty";
+                        $this->score .= FORTY;
                         break;
                 }
             }
         }
     }
 
-    public function __toString()
+    public
+    function __toString()
     {
         return $this->score;
     }
